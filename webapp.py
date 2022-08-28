@@ -1,4 +1,6 @@
 from dataclasses import dataclass
+from pathlib import Path
+import tempfile
 
 from PIL import Image
 import streamlit as st
@@ -60,9 +62,12 @@ if __name__ == '__main__':
     setup()
 
     if img := st.file_uploader('Upload image.', type=['png', 'jpg']):
-        bg_image = Image.open(img)
+        tmp = tempfile.NamedTemporaryFile(delete=False)
+        tmp.write(img.getvalue())
+        bg_image = Image.open(tmp.name)
+
         canvas_result = st_canvas(
-            fill_color='#ff000020',
+            fill_color='#ff000030',
             stroke_width=1,
             background_image=bg_image,
             height=bg_image.height,
