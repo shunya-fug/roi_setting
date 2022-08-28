@@ -65,6 +65,7 @@ if __name__ == '__main__':
         tmp = tempfile.NamedTemporaryFile(delete=False)
         tmp.write(img.getvalue())
         bg_image = Image.open(tmp.name)
+        st.image(bg_image)
 
         canvas_result = st_canvas(
             fill_color='#ff000030',
